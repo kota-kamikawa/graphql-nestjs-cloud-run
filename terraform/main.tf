@@ -32,3 +32,14 @@ module "artifact-registry" {
   artifact_registry_location = var.primary_region
   backend_app_name           = local.backend_app_name
 }
+
+# Cloud Build
+# バックエンドデプロイ
+module "cloud-build" {
+  source               = "./modules/cloud-build"
+  gcp_project_id       = var.gcp_project_id
+  region               = var.primary_region
+  backend_app_name     = local.backend_app_name
+  github_owner         = "kota-kamikawa"
+  github_app_repo_name = "graphql-nestjs-cloud-run"
+}
