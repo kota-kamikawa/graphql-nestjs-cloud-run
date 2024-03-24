@@ -3,8 +3,8 @@
 This example shows how to implement an **GraphQL server (code-first) with TypeScript** with the following stack:
 
 - [NestJS](https://docs.nestjs.com/graphql/quick-start): Web framework for building scalable server-side applications
-- [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client): Databases access (ORM)                  
-- [**Prisma Migrate**](https://www.prisma.io/docs/concepts/components/prisma-migrate): Database migrations               
+- [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client): Databases access (ORM)
+- [**Prisma Migrate**](https://www.prisma.io/docs/concepts/components/prisma-migrate): Database migrations
 - [**SQLite**](https://www.sqlite.org/index.html): Local, file-based SQL database
 
 The example was bootstrapped using the NestJS CLI command `nest new graphql-nestjs`.
@@ -53,7 +53,6 @@ npx prisma migrate dev --name init
 
 When `npx prisma migrate dev` is executed against a newly created database, seeding is also triggered. The seed file in [`prisma/seed.ts`](./prisma/seed.ts) will be executed and your database will be populated with the sample data.
 
-
 ### 2. Start the GraphQL server
 
 Launch your GraphQL server with this command:
@@ -63,7 +62,6 @@ npm run dev
 ```
 
 Navigate to [http://localhost:3000/graphql](http://localhost:3000/graphql) in your browser to explore the API of your GraphQL server in a [GraphQL Playground](https://github.com/prisma/graphql-playground).
-
 
 ## Using the GraphQL API
 
@@ -112,7 +110,6 @@ query {
   }
 }
 ```
-
 
 ### Create a new user
 
@@ -369,3 +366,7 @@ const userWithUpdatedProfile = await prisma.user.update({
 - Share your feedback in the [`#product-wishlist`](https://prisma.slack.com/messages/CKQTGR6T0/) channel on the [Prisma Slack](https://slack.prisma.io/)
 - Create issues and ask questions on [GitHub](https://github.com/prisma/prisma/)
 - Watch our biweekly "What's new in Prisma" livestreams on [Youtube](https://www.youtube.com/channel/UCptAHlN1gdwD89tFM3ENb6w)
+
+## Cloud Run
+
+<https://zenn.dev/waddy/books/graphql-nestjs-nextjs-bootcamp/viewer/deploy_nestjs>
