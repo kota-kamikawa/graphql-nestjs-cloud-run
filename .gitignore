@@ -42,3 +42,6 @@ lerna-debug.log*
 
 # .tfvars files
 *.tfvars
+
+# env
+.env
