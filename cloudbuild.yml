@@ -19,17 +19,15 @@ steps:
     dir: '.'
     waitFor: ['build-backend']
 
-  - id: 'apply-migrations'
-     steps:
-     - name: 'node'
-      entrypoint: 'npm'
-      args: ['install']
-    - name: 'node'
-      entrypoint: 'npm'
-      args: ['run', 'build']
-    - name: 'node'
-      entrypoint: 'npm'
-      args: ['run', 'prisma', 'migrate', 'deploy']
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['install']
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['run', 'build']
+  - name: 'node'
+    entrypoint: 'npm'
+    args: ['run', 'prisma', 'migrate', 'deploy']
     secretEnv: ['DATABASE_URL']
     dir: '.'
     waitFor: ['push-backend']
