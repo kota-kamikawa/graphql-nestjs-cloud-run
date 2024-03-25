@@ -26,8 +26,8 @@ steps:
     entrypoint: 'npm'
     args: ['run', 'build']
   - name: 'node'
-    entrypoint: 'npm'
-    args: ['run', 'prisma', 'migrate', 'deploy']
+    entrypoint: 'npx'
+    args: ['prisma', 'migrate', 'deploy']
     secretEnv: ['DATABASE_URL']
     dir: '.'
     waitFor: ['push-backend']
