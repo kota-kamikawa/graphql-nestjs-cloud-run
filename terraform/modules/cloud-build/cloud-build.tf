@@ -14,8 +14,8 @@ resource "google_cloudbuild_trigger" "graphql-training-backend-app" {
       branch = "^main$"
     }
   }
-  included_files = ["graphql-nestjs-cloud-run/**"]
-  filename       = "graphql-nestjs-cloud-run/cloudbuild.yml"
+  included_files = ["./**"]
+  filename       = "cloudbuild.yml"
   substitutions = {
     _REGION                         = var.region
     _ARTIFACT_REPOSITORY_IMAGE_NAME = "${var.region}-docker.pkg.dev/${var.gcp_project_id}/${var.backend_app_name}/backend"
