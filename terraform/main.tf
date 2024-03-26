@@ -33,13 +33,20 @@ module "artifact-registry" {
   backend_app_name           = local.backend_app_name
 }
 
+# Cloud Run Service Account
+module "cloud-run" {
+  source         = "./modules/cloud-run"
+  gcp_project_id = var.gcp_project_id
+}
+
 # Cloud Build
 # バックエンドデプロイ
 module "cloud-build" {
-  source               = "./modules/cloud-build"
-  gcp_project_id       = var.gcp_project_id
-  region               = var.primary_region
-  backend_app_name     = local.backend_app_name
-  github_owner         = "kota-kamikawa"
-  github_app_repo_name = "graphql-nestjs-cloud-run"
+  source                    = "./modules/cloud-build"
+  gcp_project_id            = var.gcp_project_id
+  region                    = var.primary_region
+  cloud_run_service_account = module.cloud-run.cloud_run_app_runner_service_account
+  backend_app_name          = local.backend_app_name
+  github_owner              = "kota-kamikawa"
+  github_app_repo_name      = "graphql-nestjs-cloud-run"
 }
