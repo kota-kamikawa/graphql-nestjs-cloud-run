@@ -15,12 +15,21 @@ variable "primary_region" {
   type        = string
 }
 
+variable "cloud_run_graphql_domain" {
+  description = "The Domain of the Cloud Run GraphQL service"
+  type        = string
+}
+
 locals {
   backend_app_name = "graphql-training-backend-app"
 }
 
 ## project ##
 provider "google" {
+  project = var.gcp_project_id
+  region  = var.primary_region
+}
+provider "google-beta" {
   project = var.gcp_project_id
   region  = var.primary_region
 }
@@ -49,4 +58,11 @@ module "cloud-build" {
   backend_app_name          = local.backend_app_name
   github_owner              = "kota-kamikawa"
   github_app_repo_name      = "graphql-nestjs-cloud-run"
+}
+
+# Api Gateway
+module "api-gateway" {
+  source                   = "./modules/api-gateway"
+  cloud_run_graphql_domain = var.cloud_run_graphql_domain
+  gcp_project_id           = var.gcp_project_id
 }
