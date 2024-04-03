@@ -6,6 +6,16 @@ info:
 host: ${cloud_run_graphql_domain} # ここにCloud RunサービスのURLを設定します
 schemes:
   - https
+securityDefinitions:
+  firebase:
+    authorizationUrl: ""
+    flow: implicit
+    type: oauth2
+    x-google-issuer: https://securetoken.google.com/${gcp_project_id}
+    x-google-jwks_uri: https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com
+    x-google-audiences: ${gcp_project_id}
+security:
+  - firebase: []
 paths:
   /graphql:
     post:

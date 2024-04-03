@@ -26,16 +26,18 @@ resource "google_project_iam_member" "api_gateway_invoker" {
   member  = "serviceAccount:${google_service_account.api_gateway_account.email}"
 }
 
-resource "google_api_gateway_api_config" "greetings_cfg" {
+resource "google_api_gateway_api_config" "graphql_config_auth" {
   provider      = google-beta
   api           = google_api_gateway_api.graphql.api_id
-  api_config_id = "graphql-config"
+  api_config_id = "graphql-config-auth"
 
   openapi_documents {
     document {
       path = "openapi2-run.yaml"
       contents = base64encode(templatefile("${path.module}/openapi2-run.yaml.tpl", {
-        cloud_run_graphql_domain = var.cloud_run_graphql_domain # プレースホルダーに値を挿入
+        # プレースホルダーに値を挿入
+        cloud_run_graphql_domain = var.cloud_run_graphql_domain
+        gcp_project_id           = var.gcp_project_id
       }))
     }
   }
@@ -53,9 +55,9 @@ resource "google_api_gateway_api_config" "greetings_cfg" {
 
 resource "google_api_gateway_gateway" "api_gw" {
   provider   = google-beta
-  api_config = google_api_gateway_api_config.greetings_cfg.id
+  api_config = google_api_gateway_api_config.graphql_config_auth.id
   gateway_id = "graphql-gateway"
   depends_on = [
-    google_api_gateway_api_config.greetings_cfg
+    google_api_gateway_api_config.graphql_config_auth
   ]
 }
